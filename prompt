@@ -1,0 +1,27 @@
+# Prompt
+set c_normal = "1;36m"
+set c_alarm = "1;31m"
+set c_white = "1;37m"
+
+if ${HOST} == "camper" then
+    set hostcolor = $c_normal
+else
+    set hostcolor = $c_alarm
+endif
+
+if (! $?_SHOW) then
+    if ($?SHOWMODE) then
+        setenv _SHOW ${SHOWMODE}
+    else
+        setenv _SHOW
+    endif
+endif
+
+set p_user = "%{\033[${c_normal}%}%n%{\033[${c_white}%}"
+set p_host = "%{\033[${hostcolor}%}%m%{\033[${c_white}%}"
+set p_date = "(%d %Y-%W-%D %P `date +%Z`)"
+
+if( ${TERM} =~ {xterm,rxvt}* ) then
+    alias precmd 'echo -n "\e]0;$cwd\a"; set prompt = "\n${p_user}@${p_host} [%{\033[1;31m%}${_SHOW}%{\033[${c_white}%}] ${p_date} %~ \n%# "' \> /dev/stderr
+    alias jobcmd 'echo -n "\e]0;"\!#:q "($cwd)\a"' \> /dev/stderr
+endif

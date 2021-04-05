@@ -1,0 +1,6 @@
+# Enable personal customizations.
+# e.g., ~/my_pystartup.py
+try:
+    from my_pystartup import *
+except Exception:
+    pass

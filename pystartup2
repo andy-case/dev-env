@@ -1,0 +1,71 @@
+# auto-complete
+import rlcompleter2
+rlcompleter2.setup()
+del rlcompleter2
+
+# for dev/qa
+import os
+import poise.schema
+run_mode = os.environ.get('RUN_MODE', 'live')
+if run_mode.lower() == 'dev':
+    poise.schema.DEV_MODE = True
+elif run_mode.lower() == 'qa':
+    poise.schema.QA_MODE = True
+
+# oft-used libraries
+from shoebox.imports import lazyModule as lm
+se = lm('showentity.api')
+dm = se.makeDM(run_mode=run_mode)
+se.ensure_local_dm(dm, run_mode=run_mode)
+ddm = se.makeDM(run_mode=run_mode, usepond=False)
+sc = lm('schmed.api')
+u = lm('unity')
+pl = lm('parts_lib.api')
+lb = lm('lockbox.api')
+sb = lm('shoebox.api')
+ddp = lm('ddp.api')
+il = lm('ilid.api')
+l = lm('lid.api')
+
+# useful functions
+def time_function(function):
+    import time
+    def new_function(*args, **kws):
+        start = time.time()
+        result = function(*args, **kws)
+        end = time.time()
+        print 'Operation took %0.2f seconds.' % (end - start)
+        return result
+    return new_function
+
+def time_str_eval(string):
+    import time
+    start = time.time()
+    result = eval(string)
+    end = time.time()
+    print 'Operation took %0.2f seconds.' % (end - start)
+    return result
+
+def make_dm(login):
+    import cxpond.client
+    import poise.dm
+    conn = cxpond.client.Connection(login=login)
+    dm = poise.dm.DataManager(conn=conn)
+    return dm
+
+# in progress
+#if os.environ.get('IN_DEV', 0) and os.environ.get('LFL_SITE') == 'ilm':
+#    import spun
+#    spun.set_no_run(True)
+
+def count(string):
+    ranges = string.split()
+    n = 0
+    for range in ranges:
+        if '-' in range:
+            start, end = range.split('-')
+            number = int(end) - int(start) + 1
+            n += number
+        else:
+            n += 1
+    return n

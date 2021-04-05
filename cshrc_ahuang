@@ -1,0 +1,32 @@
+setenv NAME 'Andy Huang'
+setenv PRINTER downtown
+setenv EDITOR vim
+setenv LS_COLORS 'di=95:fi=0:ln=96:ex=92'
+setenv BROWSER firefox
+setenv PYTHONPATH ${HOME}/python:/dept/ra/python
+setenv DEV /dept/is/dev/ahuang
+setenv PS ${DEV}/infosys/prodsoft
+setenv PRODSOFT_AUTO_TRACK 1
+setenv TERM rxvt
+
+set cdpath = ( /show )
+set path = (. /var/tmp/donotremove/bin ${HOME}/apps/bin ${HOME}/bin/personal ${HOME}/bin/shell ${HOME}/bin/tmux ${HOME}/bin/tableau ${HOME}/bin/drm ${HOME}/bin/drm/compute ${HOME}/bin/drm/storage ${HOME}/bin /usr/local/bin /dept/ra/bin ${path} )
+set history = 100
+set histdup = prev
+set ignoreeof
+set autolist ambiguous
+set histfile = $TMPDIR/$USER.hist
+unset listmaxrows
+unset correct
+
+source /dept/ra/etc/deptrc
+source /dept/is/prodsoft/etc/deptrc
+source ${HOME}/.aliases
+source ${HOME}/etc/prompt
+
+# Perforce
+setenv P4USER ahuang
+setenv P4PORT spindle:1666
+setenv P4CLIENT prodsoft_ahuang
+setenv P4PASSWD 3C04FA0159915B4E18AA973540954A44
+setenv P4CROOT /dept/is/dev/ahuang

@@ -1,0 +1,22 @@
+[user]
+	name = Andy Huang
+	email = ahuang@myriad.com
+[color]
+	ui = true
+[core]
+	editor = /usr/bin/vim
+[push]
+	default = simple
+[url "git@github.counsyl.com:"]
+    insteadOf = https://github.counsyl.com
+[url "git@github.com:"]
+    insteadOf = https://github.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[log]
+	follow = true
+[remote "origin"]
+    tagOpt = --tags
