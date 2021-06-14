@@ -1,0 +1,37 @@
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+syntax enable
+set background=dark
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+colorscheme solarized
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+set ruler
+
+" set number
+
+set ignorecase
+set smartcase
+
+set colorcolumn=80,100
+
+set dir=/tmp
+
+
+set hlsearch
+
+nnoremap @gd :!git diff %
+
+fun! <SID>StripTrailingWhitespaces()
+  let l=line(".")
+  let c=col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
